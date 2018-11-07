@@ -1,0 +1,78 @@
+
+
+*
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+	font-size: 14px
+	font-family: monospace
+
+body
+	background: rgba(0, 0, 0, .92)
+
+/* ***** ***** ***** CONNECTION ***** ***** ***** */
+$connection_common_bcg: rgba(90, 90, 90, .9)
+$connection_common_clr: black
+
+$connection_try_bcg: lightblue
+$connection_try_clr: blue
+
+$connection_good_bcg: lightgreen
+$connection_good_clr: black
+
+$connection_error_bcg: rgba(0, 0, 0, .9)
+$connection_error_clr: red
+
+$connection_reboot_bcg: white
+$connection_reboot_clr: green
+
+$connection_dis_bcg: blue
+$connection_dis_clr: red
+
+$connection_height: 24px
+
+.connection
+	display: none
+	position: absolute
+	top: 0
+	left: 0
+	right: 0
+	z-index: 999
+	font-size: 1.2rem
+	font-weight: 800
+	text-align: center
+	height: $connection_height
+	padding: calc(#{$connection_height} / 2 - 0.6em) 0
+	color: $connection_common_clr
+	background: $connection_common_bcg
+	&.try, 
+	&.good, 
+	&.error, 
+	&.reboot,
+	&.dis
+		display: block
+	&.try
+		background: $connection_try_bcg
+		color: $connection_try_clr
+	&.good
+		background: $connection_good_bcg
+		color: $connection_good_clr
+		opacity: 0
+		animation: opacity_hide 4s
+	&.error
+		background: $connection_error_bcg
+		color: $connection_error_clr
+	&.reboot
+		background: $connection_reboot_bcg
+		color: $connection_reboot_clr
+	&.dis
+		background: $connection_dis_bcg
+		color: $connection_dis_clr
+@keyframes opacity_hide
+	0%
+		opacity: 1
+	75%
+		opacity: 1
+	100%
+		opacity: 0
+/* ***** ***** ***** CONNECTION END ***** ***** ***** */

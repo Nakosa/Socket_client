@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>New game</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="icon" href="favicon.png">
+</head>
+<body>
+	<div id="connection" class="connection"></div>
+	<div id="popup" class="popup"></div>
+	<div id="main_game" class="main">
+		<br><br><br>
+		<button onclick="connect(); return false;">connect</button>
+		<button onclick="disconnect(); return false;">disconnect</button>
+		<br>
+		<input type="text" id="text">
+		<button onclick="send(document.getElementById('text').value); return false;">send</button>
+	</div>
+	<div class="scripts">
+		<script src="game.js"></script>
+		<script src="script.js"></script>
+		<script>
+		</script>
+	</div>
+</body>
+</html>
