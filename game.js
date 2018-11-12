@@ -197,8 +197,7 @@ class SocketConnection{
 	__validate_connetion(){
 		let API_KEY = this.cookie.get('API_KEY');
 		let msg = this.message_type.on_connect(API_KEY);
-		this.socket.send(msg);
-
+		//this.socket.send(msg);
 	}
 
 	__reconnect(rebot = false){
