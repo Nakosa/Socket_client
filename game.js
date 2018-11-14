@@ -87,6 +87,24 @@ class Game{
 	debug(){
 		console.log(this);
 	}
+
+	network_testing(timeout = 1000, len = 512){
+		let timeout_delta = Math.ceil(timeout * 0.25);
+		let text = this.random(len);
+		let THIS = this;
+		
+		setInterval(function(){
+			THIS.send(text);
+		}, THIS.getRandomInt(timeout - timeout_delta, timeout + timeout_delta));
+	}
+
+	random(len = 8, s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"){
+		return Array(len).join().split(',').map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join('');
+	}
+
+	getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min)) + min;
+	}
 }
 
 
@@ -109,12 +127,9 @@ class SocketConnection{
 		this.message_box = document.getElementById('connection');
 		this.states = new SocketConnectionState();
 		this.state = this.states.COMMON;
-		this.cookie = new Cookie();
 		this.message_type = new SocketMessagesType();
 
-		//let token = 'erwty43ytgrfdghdre';
-		let token = '';
-		this.host = 'ws://' + (token != '' ? token + '@' : '') + _host + ':' + _port + '/';
+		this.host = 'ws://' + _host + ':' + _port + '/';
 		this.socket = null;
 		this.connected = false;
 		this.timeoutid;
@@ -195,9 +210,7 @@ class SocketConnection{
 	}
 
 	__validate_connetion(){
-		let API_KEY = this.cookie.get('API_KEY');
-		let msg = this.message_type.on_connect(API_KEY);
-		//this.socket.send(msg);
+
 	}
 
 	__reconnect(rebot = false){
@@ -405,24 +418,24 @@ class Ping{
 
 class Cookie{
 
-	set(name, value, options){
-		this._setCookie(name, value, options);
+	static set(name, value, options){
+		Cookie._setCookie(name, value, options);
 	}
 
-	get(name = ''){
+	static get(name = ''){
 		var matches = document.cookie.match(new RegExp(
 			"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
 		));
 		return matches ? decodeURIComponent(matches[1]) : undefined;
 	}
 
-	delete(name){
-		this._setCookie(name, '', {
+	static delete(name){
+		Cookie._setCookie(name, '', {
 			expires: -1
 		});
 	}
 
-	_setCookie(name, value, options){
+	static _setCookie(name, value, options){
 		options = options || {};
 
 		var expires = options.expires;
